@@ -34,8 +34,8 @@ public class EmpHomeJFrame extends javax.swing.JFrame {
         jSplitPane = new javax.swing.JSplitPane();
         ButtonJPanel = new javax.swing.JPanel();
         BtnCreateEmp = new javax.swing.JButton();
+        BtnViewEmp = new javax.swing.JButton();
         BtnSearchEmp = new javax.swing.JButton();
-        BtnUpdateEmp = new javax.swing.JButton();
         BtnDeleteEmp = new javax.swing.JButton();
         MainJPanel = new javax.swing.JPanel();
 
@@ -45,16 +45,16 @@ public class EmpHomeJFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Human Resource Management System");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(168, 168, 168)
                 .addComponent(jLabel1)
-                .addGap(241, 241, 241))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,17 +71,17 @@ public class EmpHomeJFrame extends javax.swing.JFrame {
             }
         });
 
+        BtnViewEmp.setText("View Employee");
+        BtnViewEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnViewEmpActionPerformed(evt);
+            }
+        });
+
         BtnSearchEmp.setText("Search Employee");
         BtnSearchEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSearchEmpActionPerformed(evt);
-            }
-        });
-
-        BtnUpdateEmp.setText("Update Employee");
-        BtnUpdateEmp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnUpdateEmpActionPerformed(evt);
             }
         });
 
@@ -99,13 +99,12 @@ public class EmpHomeJFrame extends javax.swing.JFrame {
             .addGroup(ButtonJPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ButtonJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnUpdateEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnSearchEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BtnCreateEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(ButtonJPanelLayout.createSequentialGroup()
-                        .addGroup(ButtonJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BtnSearchEmp)
-                            .addComponent(BtnDeleteEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(BtnDeleteEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(BtnViewEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         ButtonJPanelLayout.setVerticalGroup(
@@ -114,9 +113,9 @@ public class EmpHomeJFrame extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(BtnCreateEmp)
                 .addGap(36, 36, 36)
-                .addComponent(BtnSearchEmp)
+                .addComponent(BtnViewEmp)
                 .addGap(36, 36, 36)
-                .addComponent(BtnUpdateEmp)
+                .addComponent(BtnSearchEmp)
                 .addGap(45, 45, 45)
                 .addComponent(BtnDeleteEmp)
                 .addGap(0, 52, Short.MAX_VALUE))
@@ -161,13 +160,15 @@ public class EmpHomeJFrame extends javax.swing.JFrame {
         jSplitPane.setRightComponent(createEmp);
     }//GEN-LAST:event_BtnCreateEmpActionPerformed
 
+    private void BtnViewEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnViewEmpActionPerformed
+        // TODO add your handling code here:
+        ViewEmployeeJPanel viewEmp = new ViewEmployeeJPanel(emphistory);
+        jSplitPane.setRightComponent(viewEmp);
+    }//GEN-LAST:event_BtnViewEmpActionPerformed
+
     private void BtnSearchEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSearchEmpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnSearchEmpActionPerformed
-
-    private void BtnUpdateEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateEmpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnUpdateEmpActionPerformed
 
     private void BtnDeleteEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeleteEmpActionPerformed
         // TODO add your handling code here:
@@ -213,7 +214,7 @@ public class EmpHomeJFrame extends javax.swing.JFrame {
     private javax.swing.JButton BtnCreateEmp;
     private javax.swing.JButton BtnDeleteEmp;
     private javax.swing.JButton BtnSearchEmp;
-    private javax.swing.JButton BtnUpdateEmp;
+    private javax.swing.JButton BtnViewEmp;
     private javax.swing.JPanel ButtonJPanel;
     private javax.swing.JPanel MainJPanel;
     private javax.swing.JLabel jLabel1;

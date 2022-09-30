@@ -54,6 +54,8 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         BtnSaveEmp = new javax.swing.JButton();
         EmpStartDatejdc = new com.toedter.calendar.JDateChooser();
 
+        setPreferredSize(new java.awt.Dimension(720, 370));
+
         EmpNamelbl.setText("Name:");
 
         EmpIdlbl.setText("Employee ID:");
@@ -88,6 +90,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
 
         EmpPositionlbl.setText("Position Title: ");
 
+        EmpContactlbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         EmpContactlbl.setText("Contact Information");
 
         EmpNumberlbl.setText("Cell Phone Number:");
