@@ -264,6 +264,50 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
 
     private void BtnUpdateEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateEmpActionPerformed
         // TODO add your handling code here:
+        
+        int selectedRowIndex = EmpJTable.getSelectedRow();
+        if(selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this, "Please select a row");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) EmpJTable.getModel();
+        Employee selEmp=(Employee)model.getValueAt(selectedRowIndex,0);
+        
+        String EmpName = EmpNametf.getText();
+        String EmpId = EmpIdtf.getText();
+        int EmpAge = Integer.parseInt(EmpAgetf.getText());
+        String EmpGender = EmpGendertf.getText();
+        Date EmpstartDate = EmpStartDatejdc.getDate();
+        String EmpLevel = EmpLeveltf.getText();
+        String EmpTeam = EmpTeamtf.getText();
+        String EmpPosition = EmpPositiontf.getText();
+        int EmpNumber = Integer.parseInt(EmpNumbertf.getText());
+        String EmpEmail = EmpEmailtf.getText();
+        
+        selEmp.setEmpName(EmpName);
+        selEmp.setEmpId(EmpId);
+        selEmp.setEmpAge(EmpAge);
+        selEmp.setEmpGender(EmpGender);
+        selEmp.setEmpStartDate(EmpstartDate);
+        selEmp.setEmpLevel(EmpLevel);
+        selEmp.setEmpTeam(EmpTeam);
+        selEmp.setEmpPosition(EmpPosition);
+        selEmp.setEmpNumber(EmpNumber);
+        selEmp.setEmpEmail(EmpEmail);
+        
+        JOptionPane.showMessageDialog(this, "Employee has been Updated");
+        
+        EmpNametf.setText("");
+        EmpIdtf.setText("");
+        EmpAgetf.setText("");
+        EmpGendertf.setText("");
+        EmpStartDatejdc.setDate(null);
+        EmpLeveltf.setText("");
+        EmpTeamtf.setText("");
+        EmpPositiontf.setText("");
+        EmpNumbertf.setText("");
+        EmpEmailtf.setText("");
     }//GEN-LAST:event_BtnUpdateEmpActionPerformed
 
     private void BtnDeleteEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeleteEmpActionPerformed
@@ -294,9 +338,9 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
         }
         System.out.println(selectedRowIndex);
         DefaultTableModel model = (DefaultTableModel) EmpJTable.getModel();
-        System.out.println(model);
-        Employee selectedEmployee=(Employee) model.getValueAt(selectedRowIndex, 0);
-        //Employee selectedEmployee=(Employee)model.getValueAt(selectedRowIndex, 0);
+        System.out.println(model.getClass().getSimpleName());
+        System.out.println(model.getClass().getName());
+        Employee selectedEmployee=(Employee)model.getValueAt(selectedRowIndex, 0);
         System.out.println("ss");          
         EmpNametf.setText(selectedEmployee.getEmpName());
         EmpIdtf.setText(selectedEmployee.getEmpId());

@@ -1,23 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-
-import java.time.LocalTime;
 import java.util.ArrayList;
-
 /**
  *
- * @author abhis
+ * @author sumit
  */
 public class EmployeeHistory {
-    private ArrayList<Employee> history;
-    
-    public LocalTime tStamp;
-    
-   public EmployeeHistory(){
+        private ArrayList<Employee> history;
+        public EmployeeHistory(){
        this.history = new ArrayList<Employee>();
    }
 
@@ -43,5 +36,5 @@ public class EmployeeHistory {
     public void deleteEmployee(Employee employee){
         history.remove(employee);
     }
-    
+
 }
