@@ -18,7 +18,7 @@ public class Employee {
         private String EmpLevel;
         private String EmpTeam;
         private String EmpPosition;
-        private int EmpNumber;
+        private Long EmpNumber;
         private String EmpEmail;
 
     public String getEmpName() {
@@ -53,7 +53,7 @@ public class Employee {
         return EmpPosition;
     }
 
-    public int getEmpNumber() {
+    public Long getEmpNumber() {
         return EmpNumber;
     }
 
@@ -93,7 +93,7 @@ public class Employee {
         this.EmpPosition = EmpPosition;
     }
 
-    public void setEmpNumber(int EmpNumber) {
+    public void setEmpNumber(Long EmpNumber) {
         this.EmpNumber = EmpNumber;
     }
 

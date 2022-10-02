@@ -6,10 +6,10 @@ package UI;
 import model.Employee;
 import model.EmployeeHistory;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import java.util.Arrays;
-import javax.swing.JList;
 /**
  *
  * @author sumit
@@ -119,11 +119,35 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
 
         EmpLevellbl.setText("Level:");
 
+        EmpNametf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EmpNametfKeyPressed(evt);
+            }
+        });
+
+        EmpAgetf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EmpAgetfKeyPressed(evt);
+            }
+        });
+
+        EmpGendertf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EmpGendertfKeyPressed(evt);
+            }
+        });
+
         EmpTeamlbl.setText("Team Info:");
 
         EmpNumberlbl.setText("Cell Phone Number:");
 
         EmpEmaillbl.setText("Email Address:");
+
+        EmpNumbertf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EmpNumbertfKeyPressed(evt);
+            }
+        });
 
         jLabel10.setText("Contact Information");
 
@@ -192,7 +216,7 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
                                                     .addComponent(EmpEmaillbl, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(EmpPositiontf, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                                                    .addComponent(EmpPositiontf)
                                                     .addComponent(EmpNumbertf)
                                                     .addComponent(EmpEmailtf)))
                                             .addGroup(layout.createSequentialGroup()
@@ -270,10 +294,7 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please select a row");
             return;
         }
-        
-        DefaultTableModel model = (DefaultTableModel) EmpJTable.getModel();
-        Employee selEmp=(Employee)model.getValueAt(selectedRowIndex,0);
-        
+        if (validate(EmpNametf.getText(),EmpIdtf.getText(),EmpAgetf.getText(),EmpStartDatejdc.getDate(),EmpNumbertf.getText(),EmpEmailtf.getText())){    
         String EmpName = EmpNametf.getText();
         String EmpId = EmpIdtf.getText();
         int EmpAge = Integer.parseInt(EmpAgetf.getText());
@@ -282,9 +303,16 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
         String EmpLevel = EmpLeveltf.getText();
         String EmpTeam = EmpTeamtf.getText();
         String EmpPosition = EmpPositiontf.getText();
-        int EmpNumber = Integer.parseInt(EmpNumbertf.getText());
+        Long EmpNumber = Long.parseLong(EmpNumbertf.getText());
         String EmpEmail = EmpEmailtf.getText();
         
+        for(Employee employees: emphistory.getHistory()){
+            if (EmpId.equals(employees.getEmpId())){
+                emphistory.deleteEmployee(employees);
+                break;
+            }
+        }
+        Employee selEmp = emphistory.addNewValue();
         selEmp.setEmpName(EmpName);
         selEmp.setEmpId(EmpId);
         selEmp.setEmpAge(EmpAge);
@@ -308,24 +336,37 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
         EmpPositiontf.setText("");
         EmpNumbertf.setText("");
         EmpEmailtf.setText("");
+        populateTable();
+        }
     }//GEN-LAST:event_BtnUpdateEmpActionPerformed
 
     private void BtnDeleteEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeleteEmpActionPerformed
         // TODO add your handling code here:
         int selectedRowIndex = EmpJTable.getSelectedRow();
-        
         if(selectedRowIndex < 0){
             JOptionPane.showMessageDialog(this, "Please select a record to delete","Error",JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
         DefaultTableModel model = (DefaultTableModel) EmpJTable.getModel();
-        Employee selectedEmployee=(Employee) model.getValueAt(selectedRowIndex, 0);
-        //Employee selectedEmployee = (Employee) model.getValueAt(selectedRowIndex, 0);
-        
-        emphistory.deleteEmployee(selectedEmployee);
+        String EmpId = model.getValueAt(selectedRowIndex, 1).toString();
+        for(Employee employees: emphistory.getHistory()){
+            if (EmpId.equals(employees.getEmpId())){
+                emphistory.deleteEmployee(employees);
+                System.out.print("employee found in history");
+                break;
+            }
+        }
+        EmpNametf.setText("");
+        EmpIdtf.setText("");
+        EmpAgetf.setText("");
+        EmpGendertf.setText("");
+        EmpStartDatejdc.setDate(null);
+        EmpLeveltf.setText("");
+        EmpTeamtf.setText("");
+        EmpPositiontf.setText("");
+        EmpNumbertf.setText("");
+        EmpEmailtf.setText("");
         JOptionPane.showMessageDialog(this, "Employee has been deleted!!");
-        
         populateTable();
     }//GEN-LAST:event_BtnDeleteEmpActionPerformed
 
@@ -336,24 +377,64 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please select a row to view");
             return;
         }
-        System.out.println(selectedRowIndex);
         DefaultTableModel model = (DefaultTableModel) EmpJTable.getModel();
-        System.out.println(model.getClass().getSimpleName());
-        System.out.println(model.getClass().getName());
-        Employee selectedEmployee=(Employee)model.getValueAt(selectedRowIndex, 0);
-        System.out.println("ss");          
-        EmpNametf.setText(selectedEmployee.getEmpName());
-        EmpIdtf.setText(selectedEmployee.getEmpId());
-        EmpAgetf.setText(String.valueOf(selectedEmployee.getEmpAge()));
-        EmpGendertf.setText(selectedEmployee.getEmpGender());
-        EmpStartDatejdc.setDate(selectedEmployee.getEmpStartDate());
-        EmpLeveltf.setText(selectedEmployee.getEmpLevel());
-        EmpTeamtf.setText(selectedEmployee.getEmpTeam());
-        EmpPositiontf.setText(selectedEmployee.getEmpPosition());
-        EmpNumbertf.setText(String.valueOf(selectedEmployee.getEmpNumber()));
-        EmpEmailtf.setText(selectedEmployee.getEmpEmail());
+        EmpNametf.setText(model.getValueAt(selectedRowIndex, 0).toString());
+        EmpIdtf.setText(model.getValueAt(selectedRowIndex, 1).toString());
+        EmpAgetf.setText(model.getValueAt(selectedRowIndex, 2).toString());
+        EmpGendertf.setText(model.getValueAt(selectedRowIndex, 3).toString());
+        EmpStartDatejdc.setDate((Date) model.getValueAt(selectedRowIndex, 4));
+        EmpLeveltf.setText(model.getValueAt(selectedRowIndex, 5).toString());
+        EmpTeamtf.setText(model.getValueAt(selectedRowIndex, 6).toString());
+        EmpPositiontf.setText(model.getValueAt(selectedRowIndex, 7).toString());
+        EmpNumbertf.setText(model.getValueAt(selectedRowIndex, 8).toString());
+        EmpEmailtf.setText(model.getValueAt(selectedRowIndex, 9).toString());
     }//GEN-LAST:event_BtnViewEmpActionPerformed
 
+    private void EmpNumbertfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmpNumbertfKeyPressed
+        // TODO add your handling code here:
+                char empnumber = evt.getKeyChar();
+        if(Character.isLetter(empnumber))
+        {
+            EmpNumbertf.setEditable(false);  
+        }
+        else {
+            EmpNumbertf.setEditable(true); }
+    }//GEN-LAST:event_EmpNumbertfKeyPressed
+
+    private void EmpAgetfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmpAgetfKeyPressed
+        // TODO add your handling code here:
+        char empage = evt.getKeyChar();
+        if(Character.isLetter(empage))
+        {
+            EmpAgetf.setEditable(false);  
+        }
+        else {
+            EmpAgetf.setEditable(true); }
+    }//GEN-LAST:event_EmpAgetfKeyPressed
+
+    private void EmpNametfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmpNametfKeyPressed
+        // TODO add your handling code here:
+        char empname = evt.getKeyChar();
+        if(Character.isLetter(empname))
+        {
+            EmpNametf.setEditable(false);  
+        }
+        else {
+            EmpNametf.setEditable(true);  
+        }
+    }//GEN-LAST:event_EmpNametfKeyPressed
+
+    private void EmpGendertfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmpGendertfKeyPressed
+        // TODO add your handling code here:
+        char empgender = evt.getKeyChar();
+        if(Character.isLetter(empgender))
+        {
+            EmpGendertf.setEditable(false);  
+        }
+        else {
+            EmpGendertf.setEditable(true);  
+        }
+    }//GEN-LAST:event_EmpGendertfKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnDeleteEmp;
@@ -383,4 +464,59 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    public static final Pattern pattern = 
+    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+    public static boolean EmailValidate(String emailStr) {
+            Matcher matcher = pattern.matcher(emailStr);
+            return matcher.find();
+    }
+    private boolean validate(String EmpName, String EmpId , String EmpAge, Date EmpStartDate, String EmpNumber, String EmpEmail) {
+        
+        if(EmpName.length()==0){
+            JOptionPane.showMessageDialog(this, "Employee Name Cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
+            
+            return false;
+        }
+        
+        if(EmpId.length()==0){
+            JOptionPane.showMessageDialog(this, "Employee ID Cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
+            
+            return false;
+        }
+        
+        if(EmpAge.length()==0){
+            JOptionPane.showMessageDialog(this, "Employee Age Cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
+            
+            return false;
+        }
+        
+        if(EmpStartDate.after((java.util.Calendar.getInstance().getTime()))){
+            JOptionPane.showMessageDialog(EmpStartDatelbl, "Start Date cannot be a future date", "Error", JOptionPane.ERROR_MESSAGE);
+            
+            return false;
+        }
+        
+        
+        if(EmpNumber.length()>10 || EmpNumber.length()==0 || EmpNumber.length()<10){
+            JOptionPane.showMessageDialog(this, "Enter a valid 10 digit Number", "Error", JOptionPane.ERROR_MESSAGE);
+            
+            return false;
+        }
+        
+        if(EmpEmail.length()==0){
+            JOptionPane.showMessageDialog(this, "Employee Email Address Cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
+            
+            return false;
+        }
+        if(!EmailValidate(EmpEmail)){
+            JOptionPane.showMessageDialog(this, "Enter Valid Employee Email", "Error", JOptionPane.ERROR_MESSAGE);
+            
+            return false;
+        }
+        else {
+            return true; }
+    }
 }
+

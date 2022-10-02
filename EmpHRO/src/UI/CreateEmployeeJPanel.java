@@ -7,6 +7,8 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import model.Employee;
 import model.EmployeeHistory;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  *
  * @author sumit
@@ -75,10 +77,21 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
                 EmpNametfActionPerformed(evt);
             }
         });
+        EmpNametf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EmpNametfKeyPressed(evt);
+            }
+        });
 
         EmpAgetf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 EmpAgetfKeyPressed(evt);
+            }
+        });
+
+        EmpGendertf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EmpGendertfKeyPressed(evt);
             }
         });
 
@@ -220,7 +233,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
             String EmpLevel = EmpLeveltf.getText();
             String EmpTeam = EmpTeamtf.getText();
             String EmpPosition = EmpPositiontf.getText();
-            int EmpNumber = Integer.parseInt(EmpNumbertf.getText());
+            Long EmpNumber = Long.parseLong(EmpNumbertf.getText());
             String EmpEmail = EmpEmailtf.getText();
             
             Employee newEmp = employeehistory.addNewValue();
@@ -292,6 +305,30 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
             EmpAgetf.setEditable(true); }
     }//GEN-LAST:event_EmpAgetfKeyPressed
 
+    private void EmpNametfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmpNametfKeyPressed
+        // TODO add your handling code here:
+        char empname = evt.getKeyChar();
+        if(Character.isLetter(empname))
+        {
+            EmpNametf.setEditable(false);  
+        }
+        else {
+            EmpNametf.setEditable(true);  
+        }
+    }//GEN-LAST:event_EmpNametfKeyPressed
+
+    private void EmpGendertfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmpGendertfKeyPressed
+        // TODO add your handling code here:
+         char empgender = evt.getKeyChar();
+        if(Character.isLetter(empgender))
+        {
+            EmpGendertf.setEditable(false);  
+        }
+        else {
+            EmpGendertf.setEditable(true);  
+        }
+    }//GEN-LAST:event_EmpGendertfKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnSaveEmp;
@@ -317,6 +354,14 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel EmpTeamlbl;
     private javax.swing.JTextField EmpTeamtf;
     // End of variables declaration//GEN-END:variables
+    
+    public static final Pattern pattern = 
+    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+    public static boolean EmailValidate(String emailStr) {
+            Matcher matcher = pattern.matcher(emailStr);
+            return matcher.find();
+    }
     private boolean validate(String EmpName, String EmpId , String EmpAge, Date EmpStartDate, String EmpNumber, String EmpEmail) {
         
         if(EmpName.length()==0){
@@ -352,6 +397,11 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         
         if(EmpEmail.length()==0){
             JOptionPane.showMessageDialog(this, "Employee Email Address Cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
+            
+            return false;
+        }
+        if(!EmailValidate(EmpEmail)){
+            JOptionPane.showMessageDialog(this, "Enter Valid Employee Email", "Error", JOptionPane.ERROR_MESSAGE);
             
             return false;
         }
