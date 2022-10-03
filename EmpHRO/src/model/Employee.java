@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+import java.awt.Image;
 import java.util.Date;
 
 /**
@@ -20,6 +21,15 @@ public class Employee {
         private String EmpPosition;
         private Long EmpNumber;
         private String EmpEmail;
+        public Image image;
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public Image getImage() {
+        return image;
+    }
 
     public String getEmpName() {
         return EmpName;

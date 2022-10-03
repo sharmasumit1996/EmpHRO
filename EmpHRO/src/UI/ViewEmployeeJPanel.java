@@ -8,6 +8,7 @@ import model.EmployeeHistory;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -28,9 +29,7 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
     
     private void populateTable(){
         DefaultTableModel model = (DefaultTableModel)EmpJTable.getModel();
-        System.out.println(model);
         model.setRowCount(0);
-        System.out.println(model);
         for(Employee employees: emphistory.getHistory()){
         
             Object[] row = new Object[10];
@@ -83,6 +82,8 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
         BtnViewEmp = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         EmpPositiontf = new javax.swing.JTextField();
+        lblImagePreview = new javax.swing.JLabel();
+        lblImagePreview1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(720, 406));
 
@@ -174,6 +175,8 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Position:");
 
+        lblImagePreview.setText("Image Preview:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -228,14 +231,18 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(EmpAgetf, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(127, 127, 127)
+                                        .addGap(18, 18, 18)
                                         .addComponent(jLabel10))
                                     .addComponent(EmpGendertf, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(EmpStartDatejdc, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(EmpLeveltf, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(lblImagePreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblImagePreview1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,7 +289,11 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EmpLevellbl)
                     .addComponent(EmpLeveltf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblImagePreview)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblImagePreview1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -378,8 +389,10 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
             return;
         }
         DefaultTableModel model = (DefaultTableModel) EmpJTable.getModel();
+        //ImageIcon i = null;
         EmpNametf.setText(model.getValueAt(selectedRowIndex, 0).toString());
         EmpIdtf.setText(model.getValueAt(selectedRowIndex, 1).toString());
+        String id = model.getValueAt(selectedRowIndex, 1).toString();
         EmpAgetf.setText(model.getValueAt(selectedRowIndex, 2).toString());
         EmpGendertf.setText(model.getValueAt(selectedRowIndex, 3).toString());
         EmpStartDatejdc.setDate((Date) model.getValueAt(selectedRowIndex, 4));
@@ -388,6 +401,15 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
         EmpPositiontf.setText(model.getValueAt(selectedRowIndex, 7).toString());
         EmpNumbertf.setText(model.getValueAt(selectedRowIndex, 8).toString());
         EmpEmailtf.setText(model.getValueAt(selectedRowIndex, 9).toString());
+        for(Employee emp:emphistory.getHistory()){
+            if(id.equals(emp.getEmpId()) && emp.getImage()!=null){
+                lblImagePreview1.setIcon(new ImageIcon(emp.getImage()));
+        }
+            if(emp.getImage()==null){
+                System.out.print("Image not saved");
+            }
+        }
+        
     }//GEN-LAST:event_BtnViewEmpActionPerformed
 
     private void EmpNumbertfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmpNumbertfKeyPressed
@@ -463,6 +485,8 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblImagePreview;
+    private javax.swing.JLabel lblImagePreview1;
     // End of variables declaration//GEN-END:variables
 
     public static final Pattern pattern = 

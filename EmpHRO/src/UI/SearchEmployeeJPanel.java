@@ -3,7 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI;
-
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Employee;
+import model.EmployeeHistory;
 /**
  *
  * @author sumit
@@ -13,8 +21,15 @@ public class SearchEmployeeJPanel extends javax.swing.JPanel {
     /**
      * Creates new form SearchEmployeeJPanel
      */
-    public SearchEmployeeJPanel() {
+    EmployeeHistory emphistory;
+    public SearchEmployeeJPanel(EmployeeHistory emphistory) {
         initComponents();
+        this.emphistory = emphistory;
+        QueryBylbl.setVisible(false);
+        QueryBytf.setVisible(false);
+        EmpStartDatejdc.setVisible(false);
+        EmpSearchbtn.setVisible(false);
+        EmpJTable.setVisible(false);
     }
 
     /**
@@ -26,19 +41,266 @@ public class SearchEmployeeJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
+        EmpNamelbl = new javax.swing.JLabel();
+        EmpIdlbl = new javax.swing.JLabel();
+        EmpEmaillbl = new javax.swing.JLabel();
+        EmpNamechk = new javax.swing.JCheckBox();
+        EmpIdchk = new javax.swing.JCheckBox();
+        EmpEmailchk = new javax.swing.JCheckBox();
+        QueryBylbl = new javax.swing.JLabel();
+        QueryBytf = new javax.swing.JTextField();
+        EmpStartDatejdc = new com.toedter.calendar.JDateChooser();
+        EmpSearchbtn = new javax.swing.JButton();
+        SearchScrollPane = new javax.swing.JScrollPane();
+        EmpJTable = new javax.swing.JTable();
+
+        jTextField1.setText("Search Employee:");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        EmpNamelbl.setText("Employee Name:");
+
+        EmpIdlbl.setText("Employee ID:");
+
+        EmpEmaillbl.setText("Employee Email:");
+
+        EmpNamechk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmpNamechkActionPerformed(evt);
+            }
+        });
+
+        EmpIdchk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmpIdchkActionPerformed(evt);
+            }
+        });
+
+        EmpEmailchk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmpEmailchkActionPerformed(evt);
+            }
+        });
+
+        QueryBylbl.setText("jLabel1");
+
+        EmpSearchbtn.setText("Search");
+        EmpSearchbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmpSearchbtnActionPerformed(evt);
+            }
+        });
+
+        EmpJTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Employee Name", "Employee ID", "Age", "Gender", "Start Date", "Level", "Team Info", "Position Title", "Cell Phone Number", "Email Address"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        SearchScrollPane.setViewportView(EmpJTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(QueryBylbl)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(EmpIdlbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(EmpNamelbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(EmpEmaillbl))
+                                        .addGap(35, 35, 35)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(EmpEmailchk)
+                                            .addComponent(EmpNamechk)
+                                            .addComponent(EmpIdchk)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(QueryBytf, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(EmpStartDatejdc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(41, 41, 41)
+                                .addComponent(EmpSearchbtn)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(SearchScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(EmpSearchbtn)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(EmpNamelbl)
+                            .addComponent(EmpNamechk))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EmpIdlbl)
+                            .addComponent(EmpIdchk))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(EmpEmaillbl)
+                            .addComponent(EmpEmailchk))
+                        .addGap(27, 27, 27)
+                        .addComponent(QueryBylbl)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(QueryBytf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EmpStartDatejdc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(46, 46, 46)
+                .addComponent(SearchScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void EmpNamechkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpNamechkActionPerformed
+        // TODO add your handling code here:
+        if (EmpNamechk.isSelected()){
+        QueryBylbl.setVisible(true);
+        QueryBytf.setVisible(true);
+        EmpStartDatejdc.setVisible(false);
+        EmpSearchbtn.setVisible(true);
+        QueryBylbl.setText("Enter Employee Name:");
+        }
+        if(!EmpNamechk.isSelected()){
+            QueryBylbl.setVisible(false);
+            QueryBytf.setVisible(false);
+            EmpStartDatejdc.setVisible(false);
+            EmpSearchbtn.setVisible(false);
+            EmpJTable.setVisible(false);
+        }
+    }//GEN-LAST:event_EmpNamechkActionPerformed
+
+    private void EmpIdchkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpIdchkActionPerformed
+        // TODO add your handling code here:
+        if (EmpIdchk.isSelected()){
+        QueryBylbl.setVisible(true);
+        QueryBytf.setVisible(true);
+        EmpStartDatejdc.setVisible(false);
+        EmpSearchbtn.setVisible(true);
+        QueryBylbl.setText("Enter Employee ID:");
+        }
+        if(!EmpIdchk.isSelected()){
+            QueryBylbl.setVisible(false);
+            QueryBytf.setVisible(false);
+            EmpStartDatejdc.setVisible(false);
+            EmpSearchbtn.setVisible(false);
+            EmpJTable.setVisible(false);
+        }
+    }//GEN-LAST:event_EmpIdchkActionPerformed
+
+    private void EmpEmailchkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpEmailchkActionPerformed
+        // TODO add your handling code here:
+        if (EmpEmailchk.isSelected()){
+        QueryBylbl.setVisible(true);
+        QueryBytf.setVisible(true);
+        EmpStartDatejdc.setVisible(false);
+        EmpSearchbtn.setVisible(true);
+        QueryBylbl.setText("Enter Employee Email:");
+        }
+        if(!EmpEmailchk.isSelected()){
+            QueryBylbl.setVisible(false);
+            QueryBytf.setVisible(false);
+            EmpStartDatejdc.setVisible(false);
+            EmpSearchbtn.setVisible(false);
+            EmpJTable.setVisible(false);
+        }
+    }//GEN-LAST:event_EmpEmailchkActionPerformed
+
+    private void EmpSearchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpSearchbtnActionPerformed
+        // TODO add your handling code here:
+        if(QueryBytf.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(SearchScrollPane, "Please enter search parameter to display");
+            return;
+        }
+        else{
+                try {
+                    populateTable(EmpNamechk.isSelected() ? QueryBytf.getText() : (EmpIdchk.isSelected() ? QueryBytf.getText() : QueryBytf.getText()));
+            } catch (ParseException ex) {
+            }
+                }
+    }//GEN-LAST:event_EmpSearchbtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox EmpEmailchk;
+    private javax.swing.JLabel EmpEmaillbl;
+    private javax.swing.JCheckBox EmpIdchk;
+    private javax.swing.JLabel EmpIdlbl;
+    private javax.swing.JTable EmpJTable;
+    private javax.swing.JCheckBox EmpNamechk;
+    private javax.swing.JLabel EmpNamelbl;
+    private javax.swing.JButton EmpSearchbtn;
+    private com.toedter.calendar.JDateChooser EmpStartDatejdc;
+    private javax.swing.JLabel QueryBylbl;
+    private javax.swing.JTextField QueryBytf;
+    private javax.swing.JScrollPane SearchScrollPane;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+        private void populateTable(String text) throws ParseException {
+    
+        DefaultTableModel model = (DefaultTableModel)EmpJTable.getModel();
+        model.setRowCount(0);
+        int count = 0;
+        ArrayList<Employee> employees = emphistory.getHistory();
+        for(Employee employee: employees){
+            EmpJTable.setVisible(true);
+            String compareString = EmpNamechk.isSelected() ? employee.getEmpName(): (EmpIdchk.isSelected() ? employee.getEmpId() : employee.getEmpEmail());
+            if(compareString.equals(text)){
+            count++;
+            Object[] row = new Object[10];
+            row[0] = employee.getEmpName();
+            row[1] = employee.getEmpId();
+            row[2] = employee.getEmpAge();
+            row[3] = employee.getEmpGender();
+            row[4] = employee.getEmpStartDate();
+            row[5] = employee.getEmpLevel();
+            row[6] = employee.getEmpTeam();
+            row[7] = employee.getEmpPosition();
+            row[8] = employee.getEmpNumber();
+            row[9] = employee.getEmpEmail();
+            model.addRow(row);
+            }
+           }
+        if(count==0){
+            JOptionPane.showMessageDialog(SearchScrollPane, "No Object found");
+        }
+        }
+
 }

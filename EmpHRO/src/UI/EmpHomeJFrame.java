@@ -4,6 +4,7 @@
  */
 package UI;
 
+import model.Employee;
 import model.EmployeeHistory;
 /**
  *
@@ -15,8 +16,10 @@ public class EmpHomeJFrame extends javax.swing.JFrame {
      * Creates new form EmpHomeJFrame
      */
     EmployeeHistory emphistory;
+    Employee newEmp;
     public EmpHomeJFrame() {
         initComponents();
+        newEmp = new Employee();
         emphistory = new EmployeeHistory();
     }
 
@@ -36,7 +39,6 @@ public class EmpHomeJFrame extends javax.swing.JFrame {
         BtnCreateEmp = new javax.swing.JButton();
         BtnViewEmp = new javax.swing.JButton();
         BtnSearchEmp = new javax.swing.JButton();
-        BtnDeleteEmp = new javax.swing.JButton();
         MainJPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,13 +87,6 @@ public class EmpHomeJFrame extends javax.swing.JFrame {
             }
         });
 
-        BtnDeleteEmp.setText("Delete Employee");
-        BtnDeleteEmp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnDeleteEmpActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout ButtonJPanelLayout = new javax.swing.GroupLayout(ButtonJPanel);
         ButtonJPanel.setLayout(ButtonJPanelLayout);
         ButtonJPanelLayout.setHorizontalGroup(
@@ -99,26 +94,21 @@ public class EmpHomeJFrame extends javax.swing.JFrame {
             .addGroup(ButtonJPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ButtonJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnSearchEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnSearchEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                     .addComponent(BtnCreateEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(ButtonJPanelLayout.createSequentialGroup()
-                        .addComponent(BtnDeleteEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(BtnViewEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         ButtonJPanelLayout.setVerticalGroup(
             ButtonJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ButtonJPanelLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(43, 43, 43)
                 .addComponent(BtnCreateEmp)
-                .addGap(36, 36, 36)
+                .addGap(50, 50, 50)
                 .addComponent(BtnViewEmp)
-                .addGap(36, 36, 36)
-                .addComponent(BtnSearchEmp)
                 .addGap(45, 45, 45)
-                .addComponent(BtnDeleteEmp)
-                .addGap(0, 52, Short.MAX_VALUE))
+                .addComponent(BtnSearchEmp)
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         jSplitPane.setLeftComponent(ButtonJPanel);
@@ -156,7 +146,7 @@ public class EmpHomeJFrame extends javax.swing.JFrame {
 
     private void BtnCreateEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCreateEmpActionPerformed
         // TODO add your handling code here:
-        CreateEmployeeJPanel createEmp = new CreateEmployeeJPanel(emphistory);
+        CreateEmployeeJPanel createEmp = new CreateEmployeeJPanel(emphistory,newEmp);
         jSplitPane.setRightComponent(createEmp);
     }//GEN-LAST:event_BtnCreateEmpActionPerformed
 
@@ -168,11 +158,9 @@ public class EmpHomeJFrame extends javax.swing.JFrame {
 
     private void BtnSearchEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSearchEmpActionPerformed
         // TODO add your handling code here:
+        SearchEmployeeJPanel searchEmp = new SearchEmployeeJPanel(emphistory);
+        jSplitPane.setRightComponent(searchEmp);
     }//GEN-LAST:event_BtnSearchEmpActionPerformed
-
-    private void BtnDeleteEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeleteEmpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnDeleteEmpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,7 +200,6 @@ public class EmpHomeJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCreateEmp;
-    private javax.swing.JButton BtnDeleteEmp;
     private javax.swing.JButton BtnSearchEmp;
     private javax.swing.JButton BtnViewEmp;
     private javax.swing.JPanel ButtonJPanel;
