@@ -42,35 +42,29 @@
                   <Component id="EmpTeamtf" alignment="0" max="32767" attributes="0"/>
                   <Component id="EmpStartDatejdc" pref="180" max="32767" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="BtnSaveEmp" min="-2" pref="331" max="-2" attributes="0"/>
+                  <Component id="BtnUploadImg" alignment="0" min="-2" pref="331" max="-2" attributes="0"/>
+                  <Component id="lblImagePreview" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="EmpContactlbl" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="BtnSaveEmp" min="-2" pref="331" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="EmpNumberlbl" max="32767" attributes="0"/>
-                                  <Component id="EmpPositionlbl" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="EmpEmaillbl" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="EmpPositiontf" max="32767" attributes="0"/>
-                                  <Component id="EmpNumbertf" max="32767" attributes="0"/>
-                                  <Component id="EmpEmailtf" pref="220" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="BtnUploadImg" alignment="0" min="-2" pref="331" max="-2" attributes="0"/>
-                          <Component id="lblImagePreview" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="EmpNumberlbl" max="32767" attributes="0"/>
+                          <Component id="EmpPositionlbl" alignment="0" max="32767" attributes="0"/>
+                          <Component id="EmpEmaillbl" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="25" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="EmpContactlbl" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="EmpPositiontf" max="32767" attributes="0"/>
+                              <Component id="EmpNumbertf" max="32767" attributes="0"/>
+                              <Component id="EmpEmailtf" pref="220" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
+              <EmptySpace pref="25" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

@@ -6,6 +6,7 @@ package UI;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -54,6 +55,8 @@ public class SearchEmployeeJPanel extends javax.swing.JPanel {
         EmpSearchbtn = new javax.swing.JButton();
         SearchScrollPane = new javax.swing.JScrollPane();
         EmpJTable = new javax.swing.JTable();
+        EmpStartDatelbl = new javax.swing.JLabel();
+        EmpStartDatechk = new javax.swing.JCheckBox();
 
         jTextField1.setText("Search Employee:");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -116,70 +119,89 @@ public class SearchEmployeeJPanel extends javax.swing.JPanel {
         });
         SearchScrollPane.setViewportView(EmpJTable);
 
+        EmpStartDatelbl.setText("Employee Start Date:");
+
+        EmpStartDatechk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmpStartDatechkActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SearchScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(QueryBylbl)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(EmpIdlbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(EmpNamelbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(EmpIdlbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(EmpNamelbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addComponent(EmpEmaillbl))
-                                        .addGap(35, 35, 35)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(EmpEmailchk)
-                                            .addComponent(EmpNamechk)
-                                            .addComponent(EmpIdchk)))))
+                                            .addComponent(EmpIdchk, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(EmpNamechk, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(EmpEmaillbl)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(EmpEmailchk))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(EmpStartDatelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(EmpStartDatechk))))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(QueryBytf, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(EmpStartDatejdc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)
+                                .addGap(18, 18, 18)
+                                .addComponent(EmpStartDatejdc, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
                                 .addComponent(EmpSearchbtn)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(SearchScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(QueryBylbl)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(EmpSearchbtn)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(EmpNamelbl)
+                    .addComponent(EmpNamechk))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(EmpIdlbl)
+                    .addComponent(EmpIdchk))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(EmpEmaillbl)
+                    .addComponent(EmpEmailchk))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(EmpStartDatechk)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(EmpNamelbl)
-                            .addComponent(EmpNamechk))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(EmpIdlbl)
-                            .addComponent(EmpIdchk))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(EmpEmaillbl)
-                            .addComponent(EmpEmailchk))
-                        .addGap(27, 27, 27)
+                        .addComponent(EmpStartDatelbl)
+                        .addGap(8, 8, 8)
                         .addComponent(QueryBylbl)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(QueryBytf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EmpStartDatejdc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(46, 46, 46)
+                            .addComponent(EmpStartDatejdc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(EmpSearchbtn, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(SearchScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGap(66, 66, 66))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -243,18 +265,40 @@ public class SearchEmployeeJPanel extends javax.swing.JPanel {
 
     private void EmpSearchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpSearchbtnActionPerformed
         // TODO add your handling code here:
-        if(QueryBytf.getText().equals(""))
+        if(QueryBytf.getText().equals("") && EmpStartDatejdc.getDate().equals(""))
         {
             JOptionPane.showMessageDialog(SearchScrollPane, "Please enter search parameter to display");
             return;
         }
-        else{
+        else if (EmpStartDatechk.isSelected())
+        {
+            populateTable(EmpStartDatejdc.getDate());
+        }
+        else {
                 try {
                     populateTable(EmpNamechk.isSelected() ? QueryBytf.getText() : (EmpIdchk.isSelected() ? QueryBytf.getText() : QueryBytf.getText()));
             } catch (ParseException ex) {
             }
-                }
+            }
     }//GEN-LAST:event_EmpSearchbtnActionPerformed
+
+    private void EmpStartDatechkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpStartDatechkActionPerformed
+        // TODO add your handling code here:
+        if (EmpStartDatechk.isSelected()){
+        QueryBylbl.setVisible(false);
+        QueryBytf.setVisible(false);
+        EmpStartDatejdc.setVisible(true);
+        EmpSearchbtn.setVisible(true);
+        QueryBylbl.setText("Enter Employee Start Date:");
+        }
+        if(!EmpStartDatechk.isSelected()){
+            QueryBylbl.setVisible(false);
+            QueryBytf.setVisible(false);
+            EmpStartDatejdc.setVisible(false);
+            EmpSearchbtn.setVisible(false);
+            EmpJTable.setVisible(false);
+        }
+    }//GEN-LAST:event_EmpStartDatechkActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -266,7 +310,9 @@ public class SearchEmployeeJPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox EmpNamechk;
     private javax.swing.JLabel EmpNamelbl;
     private javax.swing.JButton EmpSearchbtn;
+    private javax.swing.JCheckBox EmpStartDatechk;
     private com.toedter.calendar.JDateChooser EmpStartDatejdc;
+    private javax.swing.JLabel EmpStartDatelbl;
     private javax.swing.JLabel QueryBylbl;
     private javax.swing.JTextField QueryBytf;
     private javax.swing.JScrollPane SearchScrollPane;
@@ -302,5 +348,35 @@ public class SearchEmployeeJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(SearchScrollPane, "No Object found");
         }
         }
+        private void populateTable(Date date){
+    
+        DefaultTableModel model = (DefaultTableModel)EmpJTable.getModel();
+        model.setRowCount(0);
+        ArrayList<Employee> employees = emphistory.getHistory();
+        int count=0;
+        for(Employee employee: employees){
+            EmpJTable.setVisible(true);
+            Date compareDate = employee.getEmpStartDate();
+            if(compareDate.before(date)){
+               count++;
+            Object[] row = new Object[10];
+            row[0] = employee.getEmpName();
+            row[1] = employee.getEmpId();
+            row[2] = employee.getEmpAge();
+            row[3] = employee.getEmpGender();
+            row[4] = employee.getEmpStartDate();
+            row[5] = employee.getEmpLevel();
+            row[6] = employee.getEmpTeam();
+            row[7] = employee.getEmpPosition();
+            row[8] = employee.getEmpNumber();
+            row[9] = employee.getEmpEmail();
+            model.addRow(row);
+            }
+            
+        }
+                if(count==0){
+            JOptionPane.showMessageDialog(SearchScrollPane, "No Object found");
+        }
+    }
 
 }

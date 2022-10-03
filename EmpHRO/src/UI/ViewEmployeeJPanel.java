@@ -150,6 +150,7 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Contact Information");
 
         BtnDeleteEmp.setText("Delete");
@@ -293,7 +294,7 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
                 .addComponent(lblImagePreview)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblImagePreview1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -439,10 +440,10 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
         char empname = evt.getKeyChar();
         if(Character.isLetter(empname))
         {
-            EmpNametf.setEditable(false);  
+            EmpNametf.setEditable(true);  
         }
         else {
-            EmpNametf.setEditable(true);  
+            EmpNametf.setEditable(false);  
         }
     }//GEN-LAST:event_EmpNametfKeyPressed
 
@@ -451,10 +452,10 @@ public class ViewEmployeeJPanel extends javax.swing.JPanel {
         char empgender = evt.getKeyChar();
         if(Character.isLetter(empgender))
         {
-            EmpGendertf.setEditable(false);  
+            EmpGendertf.setEditable(true);  
         }
         else {
-            EmpGendertf.setEditable(true);  
+            EmpGendertf.setEditable(false);  
         }
     }//GEN-LAST:event_EmpGendertfKeyPressed
 
